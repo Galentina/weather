@@ -15,11 +15,7 @@ export const FilterReducer = (state = initialState1, action) => {
 
         return {
             ...state,
-            filterValues: {
-                dayType: action.payload.dayType,
-                minT:    action.payload.minT,
-                maxT:    action.payload.maxT,
-            },
+            filterValues: action.payload,
         };
     }
     default: return state;
