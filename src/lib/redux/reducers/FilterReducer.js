@@ -11,9 +11,15 @@ const initialState1 = {
 export const FilterReducer = (state = initialState1, action) => {
     switch (action.type) {
     case FilterTypes.SET_FILTER: {
+        console.log(action.payload);
+
         return {
             ...state,
-            filterValues: action.payload,
+            filterValues: {
+                dayType: action.payload.dayType,
+                minT:    action.payload.minT,
+                maxT:    action.payload.maxT,
+            },
         };
     }
     default: return state;

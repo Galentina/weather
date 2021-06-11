@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { api } from '../api';
-import { setDays } from '../lib/redux/actions';
+import { setDays, setFilter } from '../lib/redux/actions';
 import { getFilter } from '../lib/redux/selector';
 
 export const useDays = () => {
@@ -16,7 +16,7 @@ export const useDays = () => {
         }
     },  []);
 
-    let res = query.data;
+    let res = query?.data;
 
     const { isFetched } = query;
     console.log(res?.length, query.data);
@@ -31,7 +31,10 @@ export const useDays = () => {
         res = res.filter((el) => el.temperature <= Number(filterVal.maxT));
     }
     if (res?.length) dispatch(setDays(res?.[ 0 ].id));
-    else dispatch(setDays(''));
+    else {
+        dispatch(setDays(''));
+    }
+
 
     return { res, isFetched };
     // noDays

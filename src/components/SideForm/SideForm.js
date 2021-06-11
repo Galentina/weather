@@ -18,7 +18,10 @@ export const SideForm = ({ data }) => {
     const dispatch = useDispatch();
 
     const valuesFilter = handleSubmit((values) => {
-        dispatch(setFilter(values));
+        const values1 = values;
+        if (!values1.dayType) values1.dayType = '';
+        console.log('value', values1);
+        dispatch(setFilter(values1));
         setOnFilter(!onFilter);
         if (onFilter) {
             reset();
@@ -42,7 +45,7 @@ export const SideForm = ({ data }) => {
             <p className = 'custom-input'>
                 <label htmlFor = 'minT'> Minimum temperature</label>
                 <input
-                    editable = { !onFilter }
+                    readOnly = { onFilter }
                     id = 'minT' type = 'number'
                     value = { minTemp }
                     { ...register('minT') }
@@ -52,7 +55,7 @@ export const SideForm = ({ data }) => {
             <p className = 'custom-input'>
                 <label htmlFor = 'maxT'> Maximum temperature</label>
                 <input
-                    editable = { !onFilter }
+                    readOnly = { onFilter }
                     id = 'maxT' type = 'number'
                     value = { maxTemp }
                     { ...register('maxT') }
